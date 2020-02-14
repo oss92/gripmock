@@ -12,7 +12,7 @@ RUN go get -u -v github.com/golang/protobuf/protoc-gen-go \
 	google.golang.org/grpc/reflection \
 	golang.org/x/net/context \
 	github.com/go-chi/chi \
-	github.com/renstrom/fuzzysearch/fuzzy \
+	github.com/lithammer/fuzzysearch/fuzzy \
 	golang.org/x/tools/imports
 
 RUN go get -u -v github.com/gobuffalo/packr/v2/... \
@@ -28,15 +28,13 @@ RUN mv /protobuf-repo/src/ /protobuf/
 
 RUN rm -rf /protobuf-repo
 
-RUN apk del git
-
 RUN mkdir -p /go/src/github.com/tokopedia/gripmock
 
 COPY . /go/src/github.com/tokopedia/gripmock
 
 WORKDIR /go/src/github.com/tokopedia/gripmock/protoc-gen-gripmock
 
-RUN packr2
+RUN cd $GOPATH && packr2
 
 # install generator plugin
 RUN go install -v
@@ -47,8 +45,6 @@ WORKDIR /go/src/github.com/tokopedia/gripmock
 
 # install gripmock
 RUN go install -v
-
-RUN rm -rf *
 
 # NGINX and SSL configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
