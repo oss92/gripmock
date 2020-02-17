@@ -12,4 +12,4 @@ fi
 
 mkdir -p /run/nginx/ && nginx
 
-gripmock $1
+gripmock $@
