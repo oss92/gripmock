@@ -54,7 +54,12 @@ func main() {
 	protoPaths := flag.Args()
 
 	if len(protoPaths) == 0 {
-		log.Fatal("Need atleast one proto file")
+		// try to get it from environment
+		protoPathEnv := os.Getenv("PROTO_PATHS")
+		protoPaths := strings.Split(protoPathEnv, ",")
+		if len(protoPaths) == 0 {
+			log.Fatal("Need at least one proto file via arguments or by setting the PROTO_PATHS env")
+		}
 	}
 
 	importDirs := strings.Split(*imports, ",")

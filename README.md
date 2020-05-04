@@ -140,3 +140,17 @@ Input matching has 3 rules to match an input. which is **equals**,**contains** a
 }
 ```
 
+### Docker compose
+```yaml
+grpc-server:
+    image: oss92/gripmock:latest
+    container_name: server
+    environment:
+      PROTO_PATHS: '/proto/mock.proto'
+    ports:
+      - '4770:4770'
+      - '4771:4771'
+    volumes:
+      - './test/proto:/proto'
+
+```
