@@ -151,7 +151,9 @@ func handleFindStub(w http.ResponseWriter, r *http.Request) {
 	output, err := findStub(stub)
 	if err != nil {
 		log.Println(err)
-		responseError(err, w)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(struct{}{})
+		// responseError(err, w)
 		return
 	}
 

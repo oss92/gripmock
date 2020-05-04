@@ -54,16 +54,16 @@ func findStub(stub *findStubPayload) (*Output, error) {
 	mx.Lock()
 	defer mx.Unlock()
 	if _, ok := stubStorage[stub.Service]; !ok {
-		return nil, fmt.Errorf("Can't find stub for Service: %s", stub.Service)
+		return nil, fmt.Errorf("can't find stub for service: %s", stub.Service)
 	}
 
 	if _, ok := stubStorage[stub.Service][stub.Method]; !ok {
-		return nil, fmt.Errorf("Can't find stub for Service:%s and Method:%s", stub.Service, stub.Method)
+		return nil, fmt.Errorf("can't find stub for service:%s and method:%s", stub.Service, stub.Method)
 	}
 
 	stubs := stubStorage[stub.Service][stub.Method]
 	if len(stubs) == 0 {
-		return nil, fmt.Errorf("Stub for Service:%s and Method:%s is empty", stub.Service, stub.Method)
+		return nil, fmt.Errorf("stub for service:%s and method:%s is empty", stub.Service, stub.Method)
 	}
 
 	closestMatch := []closeMatch{}
