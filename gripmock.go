@@ -56,7 +56,7 @@ func main() {
 	if len(protoPaths) == 0 {
 		// try to get it from environment
 		protoPathEnv := os.Getenv("PROTO_PATHS")
-		protoPaths := strings.Split(protoPathEnv, ",")
+		protoPaths = strings.Split(protoPathEnv, ",")
 		if len(protoPaths) == 0 {
 			log.Fatal("Need at least one proto file via arguments or by setting the PROTO_PATHS env")
 		}
